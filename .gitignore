@@ -1,12 +1,18 @@
+# Node
+node_modules
+*.log
+.nvm
+
+# Windows
 *AppPackages*
 *BundleArtifacts*
 *ReactAssets*
 
-#OS junk files
+# OS
 [Tt]humbs.db
 *.DS_Store
 
-#Visual Studio files
+# Visual Studio files
 *.[Oo]bj
 *.user
 *.aps
@@ -36,20 +42,20 @@ ipch/
 [Rr]elease*/
 Ankh.NoLoad
 
-#MonoDevelop
+# MonoDevelop
 *.pidb
 *.userprefs
 
-#Tooling
+# Tooling
 _ReSharper*/
 *.resharper
 [Tt]est[Rr]esult*
 *.sass-cache
 
-#Project files
+# Project files
 [Bb]uild/
 
-#Subversion files
+# Subversion files
 .svn
 
 # Office Temp Files
@@ -58,24 +64,21 @@ _ReSharper*/
 # vim Temp Files
 *~
 
-#NuGet
+# NuGet
 packages/
 *.nupkg
 
-#ncrunch
+# ncrunch
 *ncrunch*
 *crunch*.local.xml
 
 # visual studio database projects
 *.dbmdl
 
-#Test files
+# Test files
 *.testsettings
 
-#Other files
+# Other files
 *.DotSettings
 .vs/
 *project.lock.json
-
-#JavaScript files
-*.jsbundle
