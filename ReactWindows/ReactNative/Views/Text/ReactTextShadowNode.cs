@@ -121,12 +121,29 @@ namespace ReactNative.Views.Text
 
             if (_inline != null)
             {
+                var _paddings = new Thickness()
+                {
+                    Left =  float.IsNaN(GetPadding(CSSSpacingType.Left)) ?
+                                float.IsNaN(GetPadding(CSSSpacingType.Horizontal)) ?
+                                    float.IsNaN(GetPadding(CSSSpacingType.All)) ? 0 : 
+                                    GetPadding(CSSSpacingType.All) :
+                                GetPadding(CSSSpacingType.Horizontal) :
+                            GetPadding(CSSSpacingType.Left),
+                    Top =   float.IsNaN(GetPadding(CSSSpacingType.Top)) ?
+                                float.IsNaN(GetPadding(CSSSpacingType.Vertical)) ?
+                                    float.IsNaN(GetPadding(CSSSpacingType.All)) ? 0 :
+                                    GetPadding(CSSSpacingType.All) :
+                                GetPadding(CSSSpacingType.Vertical) :
+                            GetPadding(CSSSpacingType.Top),
+                };
+
                 var args = Tuple.Create(
                     _inline,
                     _textAlignment,
                     _lineHeight,
                     _numberOfLines,
-                    _letterSpacing);
+                    _letterSpacing,
+                    _paddings);
 
                 uiViewOperationQueue.EnqueueUpdateExtraData(ReactTag, args);
             }
@@ -371,7 +388,7 @@ namespace ReactNative.Views.Text
             throw new InvalidOperationException("Property "  + property + " is supported only on the outermost text block.");
         }
 
-        private static MeasureOutput MeasureText(CSSNode node, float width, float height)
+        private static MeasureOutput MeasureText(CSSNode node, float width, CSSMeasureMode widthMode, float height, CSSMeasureMode heightMode)
         {
             // This is not a terribly efficient way of projecting the height of
             // the text elements. It requires that we have access to the
@@ -394,7 +411,7 @@ namespace ReactNative.Views.Text
                 textBlock.CharacterSpacing = textNode._letterSpacing;
                 textBlock.LineHeight = textNode._lineHeight;
                 textBlock.MaxLines = textNode._numberOfLines;
-                textBlock.TextAlignment = (TextAlignment)textNode._textAlignment;
+                textBlock.TextAlignment = textNode._textAlignment;
 
                 textBlock.Inlines.Add(ReactTextShadowNodeInlineVisitor.Apply(node));
 
